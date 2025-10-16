@@ -83,10 +83,11 @@ WSGI_APPLICATION = 'todo_api.wsgi.application'
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'todo',
-#         'USER': 'todo_user',
-#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'postgres'),
-#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+
 #     }
 # }
 
@@ -95,7 +96,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
+}   
 
 
 # Password validation
@@ -143,12 +144,12 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'PAGE_SIZE': 20,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-
-
    'DEFAULT_FILTER_BACKENDS': [
        "rest_framework.filters.SearchFilter",
        "rest_framework.filters.OrderingFilter",

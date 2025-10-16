@@ -13,13 +13,11 @@ from django_filters.rest_framework import DjangoFilterBackend
 # ToDo CRUD API
 class TodoViewSet(viewsets.ModelViewSet):
     serializer_class = TodoSerializer
-    permission_classes = []
     filter_backends = (SearchFilter, OrderingFilter, DjangoFilterBackend)  # Men gosdum
     search_fields = ('title', 'description')   # Men gosdum
     filterset_fields = ('completed',)
 
     def get_queryset(self):
-        # Sadece giriş yapan kullanıcının görevlerini getir
         return Todo.objects.filter(owner=self.request.user)
 
     def perform_create(self, serializer):
