@@ -7,6 +7,7 @@ class Todo(models.Model):
     description = models.TextField(blank=True)
     completed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    is_important = models.BooleanField(default=False)
 
 
     def __str__(self):
